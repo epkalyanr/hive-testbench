@@ -1,12 +1,15 @@
 #!/bin/bash
-#Script Usage : ./RunTPCH.sh SCALE_FACTOR CLUSTER_SSH_PASSWORD
+#Script Usage : ./RunTpch.sh SCALE_FACTOR CLUSTER_SSH_PASSWORD
+
+if [ $# -ne 2 ]
+then
+	echo "Usage: ./RunTPCH SCALE_FACTOR CLUSTER_SSH_PASSWORD"
+	exit 1
+fi
 
 TARGET_DIR=hive-testbench
 
-if [ -z $1 ]
-then
-	echo "Usage: ./RunTPCH SCALE_FACTOR CLUSTER_SSH_PASSWORD"
-fi
+sudo apt-get install git
 
 if [ ! -d "$TARGET_DIR" ]; then
 	git clone https://github.com/epkalyanr/hive-testbench.git $TARGET_DIR
@@ -14,7 +17,7 @@ else
 	echo "Test bench already downloaded..."
 fi
 
-sudo chmod 777 -R $TARGET_DIR
+chmod 777 -R $TARGET_DIR
 
 cd $TARGET_DIR
 
@@ -22,11 +25,11 @@ cd $TARGET_DIR
 
 ./tpch-setup.sh $1
 
-cd ./TPCHScripts
+cd ./tpch-scripts
 
 echo "Running TPCH Queries and Collecting PAT Data"
 
-./GetPatData.sh $2 ./tpch-queryexec.sh
+./RunQueriesAndCollectPATData $1 $2
 
 echo "collecting perf data"
 ./CollectPerfData.sh

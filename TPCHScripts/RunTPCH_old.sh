@@ -1,11 +1,11 @@
 #!/bin/bash
-#Script Usage : ./RunTPCH.sh SCALE_FACTOR CLUSTER_SSH_PASSWORD
+#Script Usage : ./RunTPCH.sh SCALE_FACTOR
 
 TARGET_DIR=hive-testbench
 
 if [ -z $1 ]
 then
-	echo "Usage: ./RunTPCH SCALE_FACTOR CLUSTER_SSH_PASSWORD"
+	echo "Usage: ./RunTPCH SCALE_FACTOR"
 fi
 
 if [ ! -d "$TARGET_DIR" ]; then
@@ -22,11 +22,11 @@ cd $TARGET_DIR
 
 ./tpch-setup.sh $1
 
-cd ./TPCHScripts
+cd $TARGET_DIR/TPCHScripts
 
 echo "Running TPCH Queries and Collecting PAT Data"
 
 ./GetPatData.sh $2 ./tpch-queryexec.sh
 
-echo "collecting perf data"
+echo "Collecting PERF Data"
 ./CollectPerfData.sh

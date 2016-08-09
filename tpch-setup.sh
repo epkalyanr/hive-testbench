@@ -68,13 +68,13 @@ runcommand "hive -i settings/load-flat.sql -f ddl-tpch/bin_flat/alltables.sql -d
 i=1
 total=8
 
-# if test $SCALE -le 1000; then 
-	# SCHEMA_TYPE=flat
-# else
+if test $SCALE -le 1000; then 
+	SCHEMA_TYPE=flat
+else
 	SCHEMA_TYPE=partitioned
 fi
 
-DATABASE=tpch_${SCHEMA_TYPE}_orc_snappy_${SCALE}
+DATABASE=tpch_${SCHEMA_TYPE}_orc_${SCALE}
 
 for t in ${TABLES}
 do

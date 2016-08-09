@@ -11,11 +11,11 @@ create table orders (O_ORDERKEY INT,
  O_CLERK STRING,
  O_SHIPPRIORITY INT,
  O_COMMENT STRING)
- partitioned by (O_ORDERDATE STRING)
+ partitioned by (O_ORDERDATE DATE)
 stored as ${FILE}
 ;
 
-ALTER TABLE orders SET TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='ZLIB');
+ALTER TABLE orders SET TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='SNAPPY');
 
 INSERT OVERWRITE TABLE orders partition(O_ORDERDATE)
 select 

@@ -5,7 +5,7 @@ drop table if exists partsupp;
 
 create table partsupp
 stored as ${FILE}
-TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='ZLIB')
+TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='SNAPPY')
 as select * from ${SOURCE}.partsupp
 cluster by PS_SUPPKEY
 ;

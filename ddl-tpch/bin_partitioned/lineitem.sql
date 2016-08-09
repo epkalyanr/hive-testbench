@@ -14,16 +14,16 @@ create table lineitem
  L_TAX DOUBLE,
  L_RETURNFLAG STRING,
  L_LINESTATUS STRING,
- L_COMMITDATE STRING,
- L_RECEIPTDATE STRING,
+ L_COMMITDATE DATE,
+ L_RECEIPTDATE DATE,
  L_SHIPINSTRUCT STRING,
  L_SHIPMODE STRING,
  L_COMMENT STRING)
- partitioned by (L_SHIPDATE STRING)
+ partitioned by (L_SHIPDATE DATE)
 stored as ${FILE}
 ;
 
-ALTER TABLE lineitem SET TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='ZLIB');
+ALTER TABLE lineitem SET TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='SNAPPY');
 
 INSERT OVERWRITE TABLE lineitem Partition(L_SHIPDATE)
 select 

@@ -5,5 +5,5 @@ drop table if exists nation;
 
 create table nation
 stored as ${FILE}
-TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='ZLIB')
+TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='SNAPPY')
 as select distinct * from ${SOURCE}.nation;

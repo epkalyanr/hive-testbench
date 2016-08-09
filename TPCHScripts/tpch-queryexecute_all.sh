@@ -13,13 +13,13 @@ QUERY_DIR=$BENCH_HOME/$BENCHMARK/sample-queries-tpch
 if [ -z $1 ]
 then
 	echo "Usage ./tpch-queryexec.sh SCALE_FACTOR"
-	echo "SCALE_FACTOR set to a default value of 2 since it was not specified"
-	SCALE=2
+	echo "SCALE_FACTOR set to a default value of 1000 since it was not specified"
+	SCALE=1000
 else
 	SCALE="$1"
 fi
 
-DATABASE="tpch_flat_orc_$SCALE"
+DATABASE="tpch_partitioned_orc_$SCALE"
 FILE_FORMAT=orc
 TABLES="part partsupp supplier customer orders lineitem nation region"
 
@@ -49,7 +49,7 @@ fi
 #i=1
 #while [ $i -le $NUM_QUERIES ]
 
-for i in {1..22}
+for i in {1..1}
 do	
 	# Measure time for query execution
 	# Start timer to measure data loading for the file formats
@@ -57,9 +57,9 @@ do
 	STARTTIME="`date +%s`" # seconds since epochstart
 	# Execute query
 		ENGINE=hive
-		printf -v j "%02d" $i
-		echo "Hive query: ${i}"
-		hive -i ${HIVE_SETTING} --database ${DATABASE} -f ${QUERY_DIR}/tpch_query${i}.sql > ${RESULT_DIR}/${DATABASE}_query${j}.txt 2>&1
+		printf -v j "%02d" $2
+		echo "Hive query: ${2}"
+		hive -i ${HIVE_SETTING} --database ${DATABASE} -f ${QUERY_DIR}/tpch_query${2}.sql > ${RESULT_DIR}/${DATABASE}_query${j}.txt 2>&1
 	
 	# Calculate the time
 	STOPDATE="`date +%Y/%m/%d:%H:%M:%S`"

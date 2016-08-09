@@ -26,7 +26,7 @@ fi
 
 if [ -z $3 ]
 then
-	SERVER=http://localhost:8188/ws/v1/timeline
+	SERVER=http://headnodehost:8188/ws/v1/timeline
 else
 	SERVER=$3
 fi
@@ -52,6 +52,6 @@ mkdir $PERFDATA_OUTPUTDIR
 
 echo "Completed Running PerfData Collection Scripts"
 
-zip -r PerfData.zip $PERFDATA_OUTPUTDIR
+zip -r $BENCH_HOME/$BENCHMARK/PerfData.zip $PERFDATA_OUTPUTDIR
 
-echo "zipped Perfdata to $PERFDATA_OUTPUTDIR"
+echo "zipped Perfdata to $BENCH_HOME/$BENCHMARK/PerfData.zip"
