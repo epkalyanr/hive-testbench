@@ -22,7 +22,7 @@ QUERY_DIR=$BENCH_HOME/$BENCHMARK/sample-queries-tpch
 
 RESULT_DIR=$BENCH_HOME/$BENCHMARK/results/
 
-if [! -d RESULT_DIR]; then
+if [ ! -d "$RESULT_DIR" ]; then
 mkdir $RESULT_DIR
 chmod -R 777 $RESULT_DIR
 fi
