@@ -8,7 +8,6 @@ then
 fi
 
 TARGET_DIR=hive-testbench
-
 sudo apt-get install git
 
 if [ ! -d "$TARGET_DIR" ]; then
@@ -29,7 +28,7 @@ cd ./tpch-scripts
 
 echo "Running TPCH Queries and Collecting PAT Data"
 
-./RunQueriesAndCollectPATData $1 $2
+./RunQueriesAndCollectPATData.sh $1 $2
 
 echo "collecting perf data"
 ./CollectPerfData.sh
