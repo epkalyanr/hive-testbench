@@ -15,7 +15,7 @@ create table orders (O_ORDERKEY INT,
 stored as ${FILE}
 ;
 
-ALTER TABLE orders SET TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='SNAPPY');
+ALTER TABLE orders SET TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='ZLIB');
 
 INSERT OVERWRITE TABLE orders partition(O_ORDERDATE)
 select 

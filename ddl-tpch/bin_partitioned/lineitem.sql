@@ -23,7 +23,7 @@ create table lineitem
 stored as ${FILE}
 ;
 
-ALTER TABLE lineitem SET TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='SNAPPY');
+ALTER TABLE lineitem SET TBLPROPERTIES('orc.bloom.filter.columns'='*','orc.compress'='ZLIB');
 
 INSERT OVERWRITE TABLE lineitem Partition(L_SHIPDATE)
 select 
